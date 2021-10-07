@@ -3,9 +3,12 @@
 
 # generated output files
 *.o
+*.log
 src/y.tab.h
 src/y.tab.c
 src/lex.yy.c
+kpp-2.2.3_01
+cflags
 
 # executables
 bin/
