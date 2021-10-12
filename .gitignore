@@ -3,9 +3,15 @@
 
 # generated output files
 *.o
+*.a
+*.log
 src/y.tab.h
 src/y.tab.c
 src/lex.yy.c
 
 # executables
 bin/
+
+# other
+cflags
+CMakeFiles
