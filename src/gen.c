@@ -82,6 +82,8 @@ int Jac_NZ, LU_Jac_NZ, nzr;
 /* for autoreduce functionality - msl, hplin, 12/8/21 */
 int DO_SLV,DO_JVS,DO_FUN,cLU_IROW,cLU_ICOL,cLU_DIAG,cLU_CROW;
 int SPC_MAP,JVS_MAP,RNVAR,cNONZERO,keepActive,keepSpcActive;
+/* msl, hplin, 1/19/22 */
+int addSpcBack;
 
 //===========================================================================
 // KPP 2.3.2_gc, Bob Yantosca (26 Mar 2021)
@@ -287,6 +289,7 @@ int i,j;
   cNONZERO      = DefElm("cNONZERO", INT, "");
   keepSpcActive = DefvElm("KEEPSPCACTIVE", LOGICAL, -NVAR, "");
   keepActive    = DefElm("KEEPACTIVE", LOGICAL,"");
+  addSpcBack    = DefvElm("ADDSPCBACK", LOGICAL, -NVAR, "");
 
   /* Elements of Stochastic simulation*/
   NMLCV = DefvElm( "NmlcV", INT, -NVAR, "No. molecules of variable species" );
@@ -2691,9 +2694,10 @@ void GenerateGlobalHeader()
     ExternDeclare(cNONZERO);
     ExternDeclare(keepSpcActive);
     ExternDeclare(keepActive);
+    ExternDeclare(addSpcBack);
     /* hplin 10/19/21 */
     WriteOMPThreadPrivate(" DO_JVS, DO_SLV, DO_FUN, cLU_IROW, cLU_ICOL, cLU_CROW");
-    WriteOMPThreadPrivate(" cLU_DIAG, JVS_MAP, SPC_MAP, rNVAR, cNONZERO, KEEPACTIVE "); /* msl_20160419 */
+    WriteOMPThreadPrivate(" cLU_DIAG, JVS_MAP, SPC_MAP, rNVAR, cNONZERO, KEEPACTIVE, ADDSPCBACK "); /* msl_20160419 */
   }
   if (useStochastic)
       ExternDeclare( VOLUME );
